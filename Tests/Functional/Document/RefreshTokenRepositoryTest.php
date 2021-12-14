@@ -8,6 +8,7 @@ use Gesdinet\JWTRefreshTokenBundle\Document\RefreshTokenRepository;
 use Gesdinet\JWTRefreshTokenBundle\Generator\RefreshTokenGenerator;
 use Gesdinet\JWTRefreshTokenBundle\Tests\Functional\Fixtures\Document\User;
 use Gesdinet\JWTRefreshTokenBundle\Tests\Functional\ODMTestCase;
+use MongoDB\Driver\Exception\ConnectionTimeoutException;
 
 /**
  * @requires extension mongodb
@@ -28,7 +29,11 @@ final class RefreshTokenRepositoryTest extends ODMTestCase
                 continue;
             }
 
-            $this->documentManager->getSchemaManager()->createDocumentCollection($class->name);
+            try {
+                $this->documentManager->getSchemaManager()->createDocumentCollection($class->name);
+            } catch (ConnectionTimeoutException $exception) {
+                $this->markTestSkipped("Can't test without server");
+            }
         }
 
         $this->documentManager->getSchemaManager()->ensureIndexes();
