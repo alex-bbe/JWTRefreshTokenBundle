@@ -24,7 +24,7 @@
     "symfony/http-kernel": "^4.4|^5.3|^6.0",
     "symfony/polyfill-php80": "^1.15",
     "symfony/property-access": "^4.4|^5.3|^6.0",
-    "symfony/security-bundle": "^3.4|^4.0|^5.2",
+    "symfony/security-bundle": "^4.4|^5.3|^6.0",
     "symfony/security-core": "^4.4|^5.3|^6.0",
     "symfony/security-http": "^4.4|^5.3|^6.0"
   },
@@ -39,7 +39,7 @@
     "phpspec/phpspec": "^7.0",
     "phpunit/phpunit": "^9.5",
     "symfony/cache": "^4.4|^5.3|^6.0",
-    "symfony/security-guard": "^4.4|^5.3"
+    "symfony/security-guard": "^4.4|^5.3|^6.0"
   },
   "conflict": {
     "doctrine/mongodb-odm": "<2.0",
