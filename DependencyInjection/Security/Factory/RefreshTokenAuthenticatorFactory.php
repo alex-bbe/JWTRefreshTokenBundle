@@ -62,7 +62,7 @@ use Symfony\Component\DependencyInjection\Reference;
     /**
      * @return string
      */
-    public function createAuthenticator(ContainerBuilder $container, string $firewallName, array $config, string $userProviderId)
+    public function createAuthenticator(ContainerBuilder $container, string $firewallName, array $config, string $userProviderId): string|array
     {
         $authenticatorId = 'security.authenticator.refresh_jwt.'.$firewallName;
 
