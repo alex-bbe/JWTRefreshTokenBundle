@@ -88,22 +88,6 @@ return static function (ContainerConfigurator $container) {
         ->class(RequestCookieExtractor::class)
         ->tag('gesdinet_jwt_refresh_token.request_extractor');
 
-    $services->set('gesdinet.jwtrefreshtoken')
-        ->deprecate(...$deprecateArgs('1.0'))
-        ->class(RefreshToken::class)
-        ->public()
-        ->args([
-            new Reference('gesdinet.jwtrefreshtoken.authenticator'),
-            new Reference('gesdinet.jwtrefreshtoken.user_provider'),
-            new Reference('lexik_jwt_authentication.handler.authentication_success'),
-            new Reference('lexik_jwt_authentication.handler.authentication_failure'),
-            new Reference('gesdinet.jwtrefreshtoken.refresh_token_manager'),
-            new Parameter('gesdinet_jwt_refresh_token.ttl'),
-            new Parameter('gesdinet_jwt_refresh_token.security.firewall'),
-            new Parameter('gesdinet_jwt_refresh_token.ttl_update'),
-            new Reference('event_dispatcher'),
-        ]);
-
     $services->set('gesdinet.jwtrefreshtoken.user_provider')
         ->deprecate(...$deprecateArgs('1.0'))
         ->class(RefreshTokenProvider::class)

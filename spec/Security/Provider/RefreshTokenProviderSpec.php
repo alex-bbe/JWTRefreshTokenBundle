@@ -71,11 +71,6 @@ final class RefreshTokenProviderSpec extends ObjectBehavior
         $this->loadUserByIdentifier('testname')->shouldImplement(UserInterface::class);
     }
 
-    public function it_does_not_support_refreshing_a_user_by_default(UserInterface $user): void
-    {
-        $this->shouldThrow(new UnsupportedUserException())->duringRefreshUser($user);
-    }
-
     public function it_refreshes_a_user_when_using_a_custom_user_provider(): void
     {
         $userProvider = new InMemoryUserProvider(['testname' => ['password' => 'secure-password']]);
