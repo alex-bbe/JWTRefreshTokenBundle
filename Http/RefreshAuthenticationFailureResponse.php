@@ -37,8 +37,8 @@ class RefreshAuthenticationFailureResponse extends JsonResponse
         return $this->message;
     }
 
-    public function setData($data = []): self
+    public function setData(mixed $data = []): self
     {
-        return parent::setData((array) $data + ['code' => $this->statusCode, 'message' => $this->message]);
+        return parent::setData((array) $data + ["code" => $this->statusCode, "message" => $this->getMessage()]);
     }
 }

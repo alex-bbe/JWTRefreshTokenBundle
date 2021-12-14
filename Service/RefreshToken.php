@@ -16,7 +16,6 @@ use Gesdinet\JWTRefreshTokenBundle\Security\Authenticator\RefreshTokenAuthentica
 use Gesdinet\JWTRefreshTokenBundle\Exception\InvalidRefreshTokenException;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Contracts\EventDispatcher\EventDispatcherInterface as ContractsEventDispatcherInterface;
 use InvalidArgumentException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
@@ -85,18 +84,14 @@ class RefreshToken
      */
     public function refresh(Request $request)
     {
+        $credentials = $this->authenticator->getCredentials($request);
         try {
-            $user = $this->authenticator->getUser(
-                $this->authenticator->getCredentials($request),
-                $this->provider
-            );
-
+            $user = $this->authenticator->getUser($credentials, $this->provider);
             $postAuthenticationToken = $this->authenticator->createAuthenticatedToken($user, $this->providerKey);
         } catch (AuthenticationException $e) {
             return $this->failureHandler->onAuthenticationFailure($request, $e);
         }
 
-        $credentials = $this->authenticator->getCredentials($request);
         $refreshToken = $this->refreshTokenManager->get($credentials['token']);
 
         if (null === $refreshToken || !$refreshToken->isValid()) {
@@ -118,11 +113,7 @@ class RefreshToken
 
         $event = new RefreshEvent($refreshToken, $postAuthenticationToken);
 
-        if ($this->eventDispatcher instanceof ContractsEventDispatcherInterface) {
-            $this->eventDispatcher->dispatch($event, 'gesdinet.refresh_token');
-        } else {
-            $this->eventDispatcher->dispatch('gesdinet.refresh_token', $event);
-        }
+        $this->eventDispatcher->dispatch('gesdinet.refresh_token', $event);
 
         return $this->successHandler->onAuthenticationSuccess($request, $postAuthenticationToken);
     }
