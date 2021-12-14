@@ -41,8 +41,8 @@ final class GesdinetJWTRefreshTokenExtensionTest extends AbstractExtensionTestCa
             ],
         );
 
-        $this->assertContainerBuilderHasParameter('gesdinet.jwtrefreshtoken.refresh_token.class', RefreshTokenEntity::class);
-        $this->assertContainerBuilderHasParameter('gesdinet.jwtrefreshtoken.object_manager.id', 'doctrine.orm.entity_manager');
+        $this->assertContainerBuilderHasParameter('gesdinet.jwtrefreshtoken.refresh_token.class', RefreshTokenDocument::class);
+        $this->assertContainerBuilderHasParameter('gesdinet.jwtrefreshtoken.object_manager.id', 'doctrine_mongodb.odm.document_manager');
         $this->assertContainerBuilderHasParameter('gesdinet.jwtrefreshtoken.user_checker.id', 'security.user_checker');
     }
 
