@@ -32,6 +32,11 @@ final class RefreshTokenAuthenticatorFactory implements AuthenticatorFactoryInte
         return 'http';
     }
 
+    public function getPriority(): int
+    {
+        return -50;
+    }
+
     public function getKey(): string
     {
         return 'refresh-jwt';
