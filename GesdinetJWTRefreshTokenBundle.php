@@ -27,7 +27,7 @@ class GesdinetJWTRefreshTokenBundle extends Bundle
         if (interface_exists(RememberMeHandlerInterface::class)) {
             /** @var SecurityExtension $extension */
             $extension = $container->getExtension('security');
-            $extension->addSecurityListenerFactory(new RefreshTokenAuthenticatorFactory());
+            $extension->addAuthenticatorFactory(new RefreshTokenAuthenticatorFactory());
         }
     }
 }
