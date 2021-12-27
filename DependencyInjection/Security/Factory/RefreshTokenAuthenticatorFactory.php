@@ -66,7 +66,7 @@ final class RefreshTokenAuthenticatorFactory implements AuthenticatorFactoryInte
     /**
      * @return string
      */
-    public function createAuthenticator(ContainerBuilder $container, string $firewallName, array $config, string $userProviderId)
+    public function createAuthenticator(ContainerBuilder $container, string $firewallName, array $config, string $userProviderId): array|string
     {
         $authenticatorId = 'security.authenticator.refresh_jwt.'.$firewallName;
 
