@@ -19,7 +19,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Parameter;
 use Symfony\Component\DependencyInjection\Reference;
 
-final class RefreshTokenAuthenticatorFactory implements SecurityFactoryInterface, AuthenticatorFactoryInterface
+final class RefreshTokenAuthenticatorFactory implements AuthenticatorFactoryInterface
 {
     public function create(ContainerBuilder $container, string $id, array $config, string $userProviderId, ?string $defaultEntryPointId): array
     {
